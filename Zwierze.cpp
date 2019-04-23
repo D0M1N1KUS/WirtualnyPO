@@ -11,6 +11,19 @@ Zwierze::Zwierze(int sila, int inicjatywa, int x, int y, Swiat* swiat, IdOrganiz
 	srand(time(NULL));
 }
 
+void Zwierze::dodajKomunikatO_WynikuWalki(Organizm* organizm, int x, int y, bool przeciwnikZginal)
+{
+	if (przeciwnikZginal) {
+		swiat->DodajKomunikat(NazwaOrganizmu(organizm->GetID()) + " zabil " + NazwaOrganizmu() + 
+			" w (" + std::to_string(x) + "," + std::to_string(y) + ")");
+	}
+	else
+	{
+		swiat->DodajKomunikat(NazwaOrganizmu() + " zabil " + NazwaOrganizmu(organizm->GetID()) +
+			" w (" + std::to_string(x) + "," + std::to_string(y) + ")");
+	}
+}
+
 WynikKolizji Zwierze::kolizja(Organizm* organizm)
 {
 	int x = organizm->getX(), y = organizm->getY();
@@ -23,7 +36,7 @@ WynikKolizji Zwierze::kolizja(Organizm* organizm)
 		{
 			if (rozmnazaj(x, y))
 			{
-				swiat->DodajKomunikat(NazwaOrganizmu(organizm->GetID()) +  " rozmnozyl sie w (" + 
+				swiat->DodajKomunikat(NazwaOrganizmu(organizm->GetID()) + " rozmnozyl sie w (" +
 					std::to_string(x) + "," + std::to_string(y) + ")");
 				return ROZMNAZANIE;
 			}
@@ -35,20 +48,20 @@ WynikKolizji Zwierze::kolizja(Organizm* organizm)
 			if (silaSasiada <= sila)
 			{
 				swiat->ustawOrganizmDoUsuniecia(organizm);
-				swiat->DodajKomunikat(NazwaOrganizmu(organizm->GetID()) + " zabil " + NazwaOrganizmu() + " w (" +
-					std::to_string(x) + "," + std::to_string(y) + ")");
+				dodajKomunikatO_WynikuWalki(organizm, x, y, true);
 				swiat->Ruch(this, x, y);
 				return ZWYCIESTWO;
 			}
 			else
 			{
-				swiat->DodajKomunikat(NazwaOrganizmu(organizm->GetID()) + " zabil " + NazwaOrganizmu() + " w (" +
-					std::to_string(x) + "," + std::to_string(y) + ")");
+				swiat->ustawOrganizmDoUsuniecia(this);
+				dodajKomunikatO_WynikuWalki(organizm, x, y, false);
 				return SMIERC;
 			}
 		}
-
 	}
+	else
+		throw std::exception("Roslina nie moze atakowac!");
 }
 
 bool Zwierze::rozmnazaj(int x, int y)
@@ -66,11 +79,6 @@ bool Zwierze::rozmnazaj(int x, int y)
 		return true;
 	}
 	return false;
-}
-
-bool Zwierze::jestZwierze(IdOrganizmu id)
-{
-	return id < 6;
 }
 
 int Zwierze::akcja(Kierunek kierunek)

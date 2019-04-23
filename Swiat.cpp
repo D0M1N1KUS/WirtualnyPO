@@ -189,6 +189,7 @@ std::vector<Organizm*>::iterator Swiat::koniecListyOrganizmow()
 std::vector<Organizm*>::iterator Swiat::usunOrganizm(std::vector<Organizm*>::iterator iterator)
 {
 	return listaOrganizmow->erase(iterator);
+	//TODO: for some reson this is not working
 }
 
 void Swiat::ustawOrganizmDoUsuniecia(Organizm* organizm)
@@ -200,6 +201,7 @@ std::vector<Organizm*>::iterator Swiat::usunOrganizmDoUsuniecia(Organizm* danyOr
 {
 	listaOrganizmow->erase(std::find(listaOrganizmow->begin(), listaOrganizmow->end(), danyOrganizm));
 	return std::find(listaOrganizmow->begin(), listaOrganizmow->end(), danyOrganizm);
+	//TODO: Something is broken while deleting organisms
 }
 
 std::vector<Organizm*>::iterator Swiat::dodajOrganizmDoDodania(Organizm* danyOrganizm)

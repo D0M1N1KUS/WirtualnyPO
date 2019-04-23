@@ -71,4 +71,9 @@ void Organizm::setPozycja(int x, int y)
 	this->y = y;
 }
 
+bool Organizm::jestZwierze(IdOrganizmu id)
+{
+	return id < 6;
+}
+
 

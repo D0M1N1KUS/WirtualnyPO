@@ -2,6 +2,8 @@
 
 #include "Organizm.h"
 
+#define PRAWDOPODOBIENSTWO_ROZRASTANIA_SIE 33
+
 namespace roslina
 {
 	class Roslina : public Organizm
@@ -9,7 +11,7 @@ namespace roslina
 	public:
 		Roslina(int sila, int x, int y, Swiat* swiat, IdOrganizmu ID);
 		int akcja();
-		WynikKolizji kolizja(int x, int y);
+		WynikKolizji kolizja(Organizm* organizm);
 		virtual void rysowanie() = 0;
 	};
 }

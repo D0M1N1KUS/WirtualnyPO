@@ -13,6 +13,8 @@ protected:
 	Swiat* swiat;
 	bool ruchZrobiony = true;
 
+	bool jestZwierze(IdOrganizmu id);
+
 public:
 	virtual ~Organizm() = default;
 	Organizm(int sila, int inicjatywa, int x, int y, Swiat* swiat, IdOrganizmu Id);
