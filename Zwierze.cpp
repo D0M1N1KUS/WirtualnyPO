@@ -14,12 +14,12 @@ Zwierze::Zwierze(int sila, int inicjatywa, int x, int y, Swiat* swiat, IdOrganiz
 void Zwierze::dodajKomunikatO_WynikuWalki(Organizm* organizm, int x, int y, bool przeciwnikZginal)
 {
 	if (przeciwnikZginal) {
-		swiat->DodajKomunikat(NazwaOrganizmu(organizm->GetID()) + " zabil " + NazwaOrganizmu() + 
+		swiat->DodajKomunikat(NazwaOrganizmu() + " zabil " + NazwaOrganizmu(organizm->GetID()) +
 			" w (" + std::to_string(x) + "," + std::to_string(y) + ")");
 	}
 	else
 	{
-		swiat->DodajKomunikat(NazwaOrganizmu() + " zabil " + NazwaOrganizmu(organizm->GetID()) +
+		swiat->DodajKomunikat(NazwaOrganizmu(organizm->GetID()) + " zabil " + NazwaOrganizmu() + 
 			" w (" + std::to_string(x) + "," + std::to_string(y) + ")");
 	}
 }

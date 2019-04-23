@@ -47,12 +47,12 @@ Swiat* tworcaSwiata::TworcaSwiata::StworzSwiat()
 		tablicaSwiata[noweX][noweY] = true;
 	}
 
-	/*for (int i = 0; i < LICZBAOWIEC; i++)
+	for (int i = 0; i < LICZBAOWIEC; i++)
 	{
 		losujPozycje();
 		listaOrganizmow->push_back(new owca::Owca(4, 6, noweX, noweY, nowySwiat));
 		tablicaSwiata[noweX][noweY] = true;
-	}*/
+	}
 
 	/*for (int i = 0; i < LICZBALISOW; i++)
 	{
