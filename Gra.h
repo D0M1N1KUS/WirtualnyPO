@@ -3,6 +3,7 @@
 #include "Swiat.h"
 #include "TworcaSwiata.h"
 #include "RysowanieSwiata.h"
+#include "StanZapisu.h"
 //#include "StanZapisu.h"
 
 #define K_GORA 0x48
@@ -21,7 +22,7 @@ namespace gra
 		Swiat* swiat;
 		tworcaSwiata::TworcaSwiata* tworcaSwiata;
 		rysowanieSwiata::RysowanieSwiata* rysownikSwiata;
-		//StanZapisu* stanZapisu;
+		StanZapisu* stanZapisu;
 
 		int nacisnietyPrzycisk = -1;
 		Kierunek kierunek = BRAK;

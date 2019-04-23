@@ -35,14 +35,16 @@ private:
 public:
 	void zaalokujNowySwiat(unsigned int y, unsigned int x);
 	Swiat(int xs, int ys);
+	void wyczyscSwiat();
 	~Swiat();
 
 	void Ruch(Organizm* org, int Xobecny, int Yobecny);
 	Organizm* GetOrganizmXY(int x, int y);
 	bool poleJestPuste(int x, int y);
 
-	void inicjalizujSwiat(std::vector<Organizm*>* listaOrganizmow);
+	void inicjalizujSwiat(std::vector<Organizm*>* listaOrganizmow, int x, int y);
 	void dodajNowyOrganizm(IdOrganizmu ID, int x, int y);
+	Organizm* stworzNowyOrganizm(IdOrganizmu ID, int pozycjaX, int pozycjaY, int sila = 0, int inicjatywa = 0);
 	void usunOrganizm(Organizm* org);
 
 	std::vector<Organizm*>::iterator poczatekListyOrganizmow();
@@ -56,6 +58,7 @@ public:
 
 	int getXS();
 	int getYS();
+	int getIloscOrganizmow();
 
 	void DodajKomunikat(std::string komunikat);
 	void WyczyscKomunikaty();

@@ -21,17 +21,27 @@ Swiat::Swiat(int xs, int ys)
 	zaalokujNowySwiat(ys, xs);
 }
 
+void Swiat::wyczyscSwiat()
+{
+	if (plansza != nullptr) {
+		for (int i = 0; i < xs; i++)
+		{
+			for (int j = 0; j < ys; j++)
+				delete plansza[i][j];
+			delete[] plansza[i];
+		}
+		delete[] plansza;
+	}
+
+	if (listaOrganizmow != nullptr) {
+		listaOrganizmow->clear();
+		delete listaOrganizmow;
+	}
+}
+
 Swiat::~Swiat()
 {
-	for (int i = 0; i < xs; i++)
-	{
-		for (int j = 0; j < ys; j++)
-			delete plansza[i][j];
-		delete[] plansza[i];
-	}
-	delete[] plansza;
-	listaOrganizmow->clear();
-	delete[] listaOrganizmow;
+	wyczyscSwiat();
 }
 
 void Swiat::Ruch(Organizm* organizm, int Xobecny, int Yobecny)
@@ -56,9 +66,12 @@ bool Swiat::poleJestPuste(int x, int y)
 	return GetOrganizmXY(x,y) == NULL;
 }
 
-void Swiat::inicjalizujSwiat(std::vector<Organizm*>* listaOrganizmow)
+void Swiat::inicjalizujSwiat(std::vector<Organizm*>* listaOrganizmow, int x, int y)
 {
-	zaalokujNowySwiat(xs, ys);
+	wyczyscSwiat();
+	xs = x;
+	ys = y;
+	zaalokujNowySwiat(x, y);
 	this->listaOrganizmow = listaOrganizmow;
 	for (int i = 0; i < listaOrganizmow->size(); i++)
 	{
@@ -110,6 +123,47 @@ void Swiat::dodajNowyOrganizm(IdOrganizmu ID, int x, int y)
 	
 	plansza[x][y] = nowyOrganizm;
 	organizmDoDodania = nowyOrganizm;
+}
+
+Organizm* Swiat::stworzNowyOrganizm(IdOrganizmu ID, int pozycjaX, int pozycjaY, int sila, int inicjatywa)
+{
+	Organizm* nowyOrganizm = nullptr;
+	switch (ID)
+	{
+	case WILK:
+		nowyOrganizm = new wilk::Wilk(sila, inicjatywa, pozycjaX, pozycjaY, this);
+		break;
+	case OWCA:
+		nowyOrganizm = new owca::Owca(sila, inicjatywa, pozycjaX, pozycjaY, this);
+		break;
+	case LIS:
+		nowyOrganizm = new lis::Lis(sila, inicjatywa, pozycjaX, pozycjaY, this);
+		break;
+	case ZOLW:
+		nowyOrganizm = new zolw::Zolw(sila, inicjatywa, pozycjaX, pozycjaY, this);
+		break;
+	case ANTYLOPA:
+		nowyOrganizm = new antylopa::Antylopa(sila, inicjatywa, pozycjaX, pozycjaY, this);
+		/*case TRAWA:
+			nowyOrganizm = new trawa::Trawa(sila, pozycjaX, pozycjaY, this);
+			break;
+		case MLECZ:
+			nowyOrganizm = new mlecz::Mlecz(sila, pozycjaX, pozycjaY, this);
+			break;
+		case GUARANA:
+			nowyOrganizm = new guarana::Guarana(sila, pozycjaX, pozycjaY, this);
+			break;
+		case WILCZAJAGODA:
+			nowyOrganizm = new wilczeJagody::WilczeJagody(sila, pozycjaX, pozycjaY, this);
+			break;
+		case BARSZ:
+			nowyOrganizm = new barszcz::Barszcz(sila, pozycjaX, pozycjaY, this);
+			break;*/
+	default:
+		throw std::exception("nieznane ID organizmu");
+	}
+
+	return nowyOrganizm;
 }
 
 void Swiat::usunOrganizm(Organizm * org)
@@ -176,6 +230,11 @@ int Swiat::getXS()
 int Swiat::getYS()
 {
 	return this->ys;
+}
+
+int Swiat::getIloscOrganizmow()
+{
+	return listaOrganizmow->size();
 }
 
 void Swiat::DodajKomunikat(std::string komunikat)

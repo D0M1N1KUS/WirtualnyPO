@@ -6,25 +6,32 @@ StanZapisu::StanZapisu(Swiat* swiat)
 	this->swiat = swiat;
 }
 
-Swiat* StanZapisu::Wczytaj(std::string plik)
+std::vector<Organizm*>* StanZapisu::Wczytaj(std::string plik)
 {
 	plikZeStanemZapisu = new Plik(plik);
 
+	//Wczytanie informacji o świecie
 	x = plikZeStanemZapisu->CzytajINT();
 	y = plikZeStanemZapisu->CzytajINT();
-	iloscOrganizmow = plikZeStanemZapisu->CzytajINT();
+	int iloscOrganizmow = plikZeStanemZapisu->CzytajINT();
 
-	listaOrganizmow = new std::vector<Organizm*>();
+	if (listaOrganizmow == nullptr)
+		listaOrganizmow = new std::vector<Organizm*>();
+	else
+		listaOrganizmow->clear();
 
+	//Wczytanie organizmów
 	for(int i = 0; i < iloscOrganizmow; i++)
 	{
-		//int* daneOrganizmu = plikZeStanemZapisu->CzytajINTy(DLUGOSC_ORGANIZMU);
-		//TODO: stworzy� organizmy
+		int* daneOrganizmu = plikZeStanemZapisu->CzytajINTy(DLUGOSC_PREAMBULY + DLUGOSC_ORGANIZMU*i, 
+			DLUGOSC_ORGANIZMU);
+		listaOrganizmow->push_back(swiat->stworzNowyOrganizm(static_cast<IdOrganizmu>(daneOrganizmu[4]),
+			daneOrganizmu[2], daneOrganizmu[3], daneOrganizmu[0], daneOrganizmu[1]));
 	}
 
 	delete plikZeStanemZapisu;
 	stanWczytany = true;
-	return nullptr; //TODO
+	return listaOrganizmow;
 }
 
 void StanZapisu::Zapisz(std::string plik)
@@ -34,12 +41,19 @@ void StanZapisu::Zapisz(std::string plik)
 	
 	plikZeStanemZapisu = new Plik(plik, true);
 
-	plikZeStanemZapisu->ZapiszINT(x);
-	plikZeStanemZapisu->ZapiszINT(y);
-	//plikZeStanemZapisu->ZapiszINT(swiat->organizmy);	//TODO: doda� do �wiata metod� do pobierania ilo�ci lub uczyni� StanZapisu klas� zaprzyja�nion�
+	//Zapisanie informacji o świecie
+	plikZeStanemZapisu->ZapiszINT(swiat->getXS());	//TODO: doda� do �wiata metod� do pobierania ilo�ci lub uczyni� StanZapisu klas� zaprzyja�nion�
+	plikZeStanemZapisu->ZapiszINT(swiat->getYS());
+	plikZeStanemZapisu->ZapiszINT(swiat->getIloscOrganizmow());
 
-	//TODO: Zapisa� w forze organizmy do pliku
+	//Zapisanie organizmów
+	for(auto it = swiat->poczatekListyOrganizmow(); it != swiat->koniecListyOrganizmow(); ++it)
+	{
+		int organizm[] = { (*it)->getSila(), (*it)->getInicjatywa(), (*it)->getX(), (*it)->getY(), (*it)->GetID() };
+		plikZeStanemZapisu->ZapiszINTy(organizm, 5);
+	}
 
+	delete plikZeStanemZapisu;
 }
 
 std::vector<Organizm*>* StanZapisu::ListaOrganizmow()

@@ -15,29 +15,42 @@ Plik::Plik(std::string& plik, bool stworzNowyPlik)
 	pozycja = 0;
 }
 
+Plik::~Plik()
+{
+	if(outputFileStream.is_open())
+	{
+		outputFileStream.flush();
+		outputFileStream.close();
+	}
+	if (inputFileStream.is_open())
+		inputFileStream.close();
+}
+
 void Plik::ZapiszINT(int i)
 {
-	outputFileStream.open(nazwaPliku, trybOtwarciaZapisuPliku);
+	if (!outputFileStream.is_open())
+		outputFileStream.open(nazwaPliku, trybOtwarciaZapisuPliku);
 
 	unsigned char* bufor = new unsigned char[sizeof(int) / sizeof(char)];
 	intTabToCharTab(&i, 1, bufor);
 
 	outputFileStream.write(reinterpret_cast<char*>(bufor), sizeof(int));
 	outputFileStream.flush();
-	outputFileStream.close();
+	//outputFileStream.close();
 	delete[] bufor;
 }
 
 void Plik::ZapiszINTy(int* i_tab, long rozmiar)
 {
-	outputFileStream.open(nazwaPliku, trybOtwarciaZapisuPliku);
+	if (!outputFileStream.is_open())
+		outputFileStream.open(nazwaPliku, trybOtwarciaZapisuPliku);
 
 	char* bufor = new char[rozmiar * sizeof(int) / sizeof(char)];
 	long dlugoscTablicyZnakow = intTabToCharTab(i_tab, rozmiar, reinterpret_cast<unsigned char*>(bufor));
 
 	outputFileStream.write(bufor, dlugoscTablicyZnakow);
 	outputFileStream.flush();
-	outputFileStream.close();
+	//outputFileStream.close();
 	delete[] bufor;
 }
 

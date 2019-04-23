@@ -38,7 +38,7 @@ class StanZapisu
 private:
 	Plik* plikZeStanemZapisu;
 
-	int x, y, iloscOrganizmow;
+	int x, y;
 	std::vector<Organizm*>* listaOrganizmow;
 	Swiat* swiat;
 
@@ -46,7 +46,7 @@ private:
 
 public:
 	StanZapisu(Swiat* swiat = nullptr);
-	Swiat* Wczytaj(std::string plik);
+	std::vector<Organizm*>* Wczytaj(std::string plik);
 	void Zapisz(std::string plik);
 
 	//gettery

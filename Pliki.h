@@ -7,7 +7,7 @@
 class Plik
 {
 private:
-	std::ios::openmode trybOtwarciaZapisuPliku = std::ios::binary | std::ios::ate;
+	std::ios::openmode trybOtwarciaZapisuPliku = std::ios::binary;
 	std::ios::openmode trybOtwarciaOdczytuPliku = std::ios::binary;
 	std::string nazwaPliku;
 	std::ofstream outputFileStream;
@@ -17,6 +17,7 @@ private:
 
 public:
 	Plik(std::string& plik, bool stworzNowyPlik = false);
+	~Plik();
 	void ZapiszINT(int i);
 	void ZapiszINTy(int* i_tab, long rozmiar);
 

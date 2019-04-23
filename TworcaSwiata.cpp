@@ -101,6 +101,6 @@ Swiat* tworcaSwiata::TworcaSwiata::StworzSwiat()
 		listaOrganizmow->push_back(new barszcz::Barszcz(0, noweX, noweY, nowySwiat));
 	}
 */
-	nowySwiat->inicjalizujSwiat(listaOrganizmow);
+	nowySwiat->inicjalizujSwiat(listaOrganizmow, xs, ys);
 	return nowySwiat;
 }

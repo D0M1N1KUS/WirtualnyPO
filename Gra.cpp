@@ -22,7 +22,7 @@ gra::Gra::Gra(int x, int y)
 	swiat = tworcaSwiata->StworzSwiat();
 	
 	rysownikSwiata = new rysowanieSwiata::RysowanieSwiata(swiat);
-	//stanZapisu = new StanZapisu(swiat);
+	stanZapisu = new StanZapisu(swiat);
 }
 
 gra::Gra::~Gra()
@@ -38,12 +38,14 @@ void gra::Gra::obslugaSterowania()
 		wykonajTure();
 	else if (nacisnietyPrzycisk == ZAPIS)
 	{
-		//stanZapisu->Zapisz(LOKALIZACJA_ZAPISU);
-		swiat->DodajKomunikat("Zapisano! (nie)");
+		stanZapisu->Zapisz(LOKALIZACJA_ZAPISU);
+		swiat->DodajKomunikat("Zapisano!");
 	}
 	else if (nacisnietyPrzycisk == WCZYTAJ)
 	{
-		//stanZapisu->Wczytaj(LOKALIZACJA_ZAPISU);
+		auto nowaListaOrganizmow = stanZapisu->Wczytaj(LOKALIZACJA_ZAPISU);
+		swiat->inicjalizujSwiat(nowaListaOrganizmow, stanZapisu->X(), stanZapisu->Y());
+		swiat->DodajKomunikat("Wczytano!");
 	}
 	else if (nacisnietyPrzycisk == ZAKONCZ)
 		return;
