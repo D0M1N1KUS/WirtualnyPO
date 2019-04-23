@@ -49,16 +49,19 @@ public:
 
 	std::vector<Organizm*>::iterator poczatekListyOrganizmow();
 	std::vector<Organizm*>::iterator koniecListyOrganizmow();
-	std::vector<Organizm*>::iterator usunOrganizm(std::vector<Organizm*>::iterator iterator);
+	//std::vector<Organizm*>::iterator usunOrganizm(std::vector<Organizm*>::iterator iterator, Organizm* danyOrganizm);
 	void ustawOrganizmDoUsuniecia(Organizm* organizm);
-	std::vector<Organizm*>::iterator usunOrganizmDoUsuniecia(Organizm* danyOrganizm);
-	std::vector<Organizm*>::iterator dodajOrganizmDoDodania(Organizm* danyOrganizm);
+	//std::vector<Organizm*>::iterator usunOrganizmDoUsuniecia(Organizm* danyOrganizm);
+	//std::vector<Organizm*>::iterator dodajOrganizmDoDodania(Organizm* danyOrganizm);
 
-	
+	int usunOrganizm(int i, int daneI);
+	int usunOrganizmDoUsuniecia(int daneI);
+	int dodajOrganizmDoDodania(int daneI);
 
 	int getXS();
 	int getYS();
 	int getIloscOrganizmow();
+	Organizm* getOrganizm(int i);
 
 	void DodajKomunikat(std::string komunikat);
 	void WyczyscKomunikaty();

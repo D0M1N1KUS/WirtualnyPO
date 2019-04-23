@@ -11,7 +11,7 @@ protected:
 	int sila, inicjatywa, x, y;
 	IdOrganizmu ID;
 	Swiat* swiat;
-	bool ruchZrobiony = true;
+	bool nowyOrganizm = true;
 
 	bool jestZwierze(IdOrganizmu id);
 
@@ -28,6 +28,7 @@ public:
 	int getY();
 	int getSila();
 	int getInicjatywa();
+	bool organizmJestNowy();
 	IdOrganizmu GetID();
 
 	std::string NazwaOrganizmu();

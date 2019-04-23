@@ -34,10 +34,8 @@ WynikKolizji Zwierze::kolizja(Organizm* organizm)
 	{
 		if (idSasiada == ID)
 		{
-			if (rozmnazaj(x, y))
+			if (!organizm->organizmJestNowy() && rozmnazaj(x, y))
 			{
-				swiat->DodajKomunikat(NazwaOrganizmu(organizm->GetID()) + " rozmnozyl sie w (" +
-					std::to_string(x) + "," + std::to_string(y) + ")");
 				return ROZMNAZANIE;
 			}
 			else
@@ -76,6 +74,8 @@ bool Zwierze::rozmnazaj(int x, int y)
 			a = wektor->at(wylosowanePole).x,
 			b = wektor->at(wylosowanePole).y;
 		swiat->dodajNowyOrganizm(ID, a, b);
+		swiat->DodajKomunikat(NazwaOrganizmu(ID) + " rozmnozyl sie w (" +
+			std::to_string(x) + "," + std::to_string(y) + ")");
 		return true;
 	}
 	return false;
@@ -83,6 +83,12 @@ bool Zwierze::rozmnazaj(int x, int y)
 
 int Zwierze::akcja(Kierunek kierunek)
 {
+	if(nowyOrganizm)
+	{
+		nowyOrganizm = false;
+		return NIE_MOGE;
+	}
+
 	int nowyX = x, nowyY = y;
 
 	switch (kierunek == BRAK ?  rand() % 4 : kierunek)

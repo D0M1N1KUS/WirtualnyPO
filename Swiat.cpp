@@ -185,27 +185,66 @@ std::vector<Organizm*>::iterator Swiat::koniecListyOrganizmow()
 {
 	return listaOrganizmow->end();
 }
-
-std::vector<Organizm*>::iterator Swiat::usunOrganizm(std::vector<Organizm*>::iterator iterator)
-{
-	return listaOrganizmow->erase(iterator);
-	//TODO: for some reson this is not working
-}
-
+//
+//std::vector<Organizm*>::iterator Swiat::usunOrganizm(std::vector<Organizm*>::iterator iterator, Organizm* danyOrganizm)
+//{
+//	if (*iterator == danyOrganizm)
+//		return listaOrganizmow->erase(iterator);
+//	std::vector<Organizm*>::iterator it = listaOrganizmow->erase(iterator);
+//	return it;//listaOrganizmow->erase(iterator);
+//}
+//
 void Swiat::ustawOrganizmDoUsuniecia(Organizm* organizm)
 {
 	organizmDoUsuniecia = organizm;
 }
+//
+//std::vector<Organizm*>::iterator Swiat::usunOrganizmDoUsuniecia(Organizm* danyOrganizm)
+//{
+//	auto doUsuniecia = std::find(listaOrganizmow->begin(), listaOrganizmow->end(), organizmDoUsuniecia);
+//	listaOrganizmow->erase(doUsuniecia);
+//	auto it = std::find(listaOrganizmow->begin(), listaOrganizmow->end(), danyOrganizm);
+//	return it;
+//	//TODO: Something is broken while deleting organisms
+//}
+//
+//std::vector<Organizm*>::iterator Swiat::dodajOrganizmDoDodania(Organizm* danyOrganizm)
+//{
+//	for (std::vector<Organizm*>::iterator itA = listaOrganizmow->begin(); itA != listaOrganizmow->end(); ++itA)
+//	{
+//		if (organizmDoDodania->GetID() == (*itA)->GetID())
+//		{
+//			for (auto itB = itA; itB != listaOrganizmow->end(); ++itB)
+//			{
+//				if (organizmDoDodania->GetID() != (*itB)->GetID() || itB == listaOrganizmow->end() - 1)
+//				{
+//					listaOrganizmow->insert(itB, organizmDoDodania);
+//					break;
+//				}
+//			}
+//			break;
+//		}
+//	}
+//	return std::find(listaOrganizmow->begin(), listaOrganizmow->end(), danyOrganizm);
+//}
 
-std::vector<Organizm*>::iterator Swiat::usunOrganizmDoUsuniecia(Organizm* danyOrganizm)
+int Swiat::usunOrganizm(int i, int daneI)
 {
-	listaOrganizmow->erase(std::find(listaOrganizmow->begin(), listaOrganizmow->end(), danyOrganizm));
-	return std::find(listaOrganizmow->begin(), listaOrganizmow->end(), danyOrganizm);
-	//TODO: Something is broken while deleting organisms
+	listaOrganizmow->erase(listaOrganizmow->begin() + i);
+	return i <= daneI ? i - 1 : i;
 }
 
-std::vector<Organizm*>::iterator Swiat::dodajOrganizmDoDodania(Organizm* danyOrganizm)
+int Swiat::usunOrganizmDoUsuniecia(int daneI)
 {
+	auto doUsuniecia = std::find(listaOrganizmow->begin(), listaOrganizmow->end(), organizmDoUsuniecia);
+	int i = std::distance(listaOrganizmow->begin(), doUsuniecia);
+	listaOrganizmow->erase(doUsuniecia);
+	return i <= daneI ? i - 1 : i;
+}
+
+int Swiat::dodajOrganizmDoDodania(int daneI)
+{
+	int i = -1;
 	for (std::vector<Organizm*>::iterator itA = listaOrganizmow->begin(); itA != listaOrganizmow->end(); ++itA)
 	{
 		if (organizmDoDodania->GetID() == (*itA)->GetID())
@@ -214,14 +253,15 @@ std::vector<Organizm*>::iterator Swiat::dodajOrganizmDoDodania(Organizm* danyOrg
 			{
 				if (organizmDoDodania->GetID() != (*itB)->GetID() || itB == listaOrganizmow->end() - 1)
 				{
-					listaOrganizmow->insert(itB, organizmDoDodania);
+					i = std::distance(listaOrganizmow->begin(), listaOrganizmow->insert(itB, organizmDoDodania));
 					break;
 				}
 			}
 			break;
 		}
 	}
-	return std::find(listaOrganizmow->begin(), listaOrganizmow->end(), danyOrganizm);
+
+	return  i <= daneI ? daneI + 1 : daneI;
 }
 
 int Swiat::getXS()
@@ -237,6 +277,11 @@ int Swiat::getYS()
 int Swiat::getIloscOrganizmow()
 {
 	return listaOrganizmow->size();
+}
+
+Organizm* Swiat::getOrganizm(int i)
+{
+	return listaOrganizmow->at(i);
 }
 
 void Swiat::DodajKomunikat(std::string komunikat)

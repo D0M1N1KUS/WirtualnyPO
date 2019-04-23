@@ -27,6 +27,8 @@ namespace gra
 		int nacisnietyPrzycisk = -1;
 		Kierunek kierunek = BRAK;
 
+		bool pierwszaTura = true;
+
 	public:
 		Gra(int x, int y);
 		~Gra();

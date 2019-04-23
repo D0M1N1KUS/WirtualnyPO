@@ -88,7 +88,7 @@ int gra::Gra::obslugaKlawiszy()
 
 void gra::Gra::wykonajTure()
 {
-	for (std::vector<Organizm*>::iterator it = swiat->poczatekListyOrganizmow();
+	/*for (std::vector<Organizm*>::iterator it = swiat->poczatekListyOrganizmow();
 		it != swiat->koniecListyOrganizmow(); ++it)
 	{
 		int wynik = (*it)->GetID() == CZLOWIEK 
@@ -100,8 +100,22 @@ void gra::Gra::wykonajTure()
 			it = swiat->usunOrganizmDoUsuniecia(*it);
 		if (wynik == ROZMNAZANIE)
 			it = swiat->dodajOrganizmDoDodania(*it);
+	}*/
+
+	for (int i = 0; i < swiat->getIloscOrganizmow(); i++)
+	{
+		int wynik = swiat->getOrganizm(i)->GetID() == CZLOWIEK
+			? swiat->getOrganizm(i)->akcja(konwertujNaKierunek(nacisnietyPrzycisk))
+			: swiat->getOrganizm(i)->akcja();
+		if (wynik == SMIERC)
+			i = swiat->usunOrganizm(i, i);
+		if (wynik == ZWYCIESTWO)
+			i = swiat->usunOrganizmDoUsuniecia(i);
+		if (wynik == ROZMNAZANIE)
+			i = swiat->dodajOrganizmDoDodania(i);
 	}
 
+	pierwszaTura = false;
 }
 
 Kierunek gra::Gra::konwertujNaKierunek(int k_kier)

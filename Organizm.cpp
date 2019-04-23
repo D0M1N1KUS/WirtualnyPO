@@ -21,6 +21,11 @@ int Organizm::getInicjatywa()
 	return this->inicjatywa;
 }
 
+bool Organizm::organizmJestNowy()
+{
+	return nowyOrganizm;
+}
+
 IdOrganizmu Organizm::GetID()
 {
 	return ID;
