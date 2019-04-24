@@ -6,14 +6,14 @@
 #define LICZBAWILKOW 0
 #define LICZBAOWIEC 0
 #define LICZBALISOW 0
-#define LICZBAZOLWI 1
-#define LICZBAANTYLOP 0
+#define LICZBAZOLWI 0
+#define LICZBAANTYLOP 2
 #define LICZBATRAWY 0
 #define LICZBAMLECZY 0
 #define LICZBAGUARANY 0
 #define LICZBAWILCZYCHJAGOD 0
 #define LICZBABARSZY 0
-#define DODAJ_CZLOWIEKA true
+#define DODAJ_CZLOWIEKA false
 
 namespace tworcaSwiata
 {

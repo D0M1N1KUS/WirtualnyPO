@@ -94,6 +94,8 @@ int Zwierze::wykonajRuch(int nowyX, int nowyY)
 			swiat->Ruch(this, nowyX, nowyY);
 			return ZWYCIESTWO;
 		}
+		if (wynik == RUCH)
+			swiat->Ruch(this, nowyX, nowyY);
 		if (wynik == ZWYCIESTWO)
 			return SMIERC;
 		if (wynik == WZMOCNIENIE)
@@ -135,9 +137,6 @@ int Zwierze::akcja(Kierunek kierunek)
 	default:
 		break;
 	}
-
-	if (nowyX < 0 || nowyY < 0)
-		return NIE_MOGE;
 
 	return wykonajRuch(nowyX, nowyY);	
 }

@@ -149,6 +149,7 @@ Organizm* Swiat::stworzNowyOrganizm(IdOrganizmu ID, int pozycjaX, int pozycjaY, 
 		break;
 	case ANTYLOPA:
 		nowyOrganizm = new antylopa::Antylopa(sila, inicjatywa, pozycjaX, pozycjaY, this);
+		break;
 	case TRAWA:
 		nowyOrganizm = new trawa::Trawa(sila, pozycjaX, pozycjaY, this);
 		break;

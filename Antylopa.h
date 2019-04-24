@@ -12,5 +12,8 @@ namespace antylopa
 		int akcja(Kierunek kierunek = BRAK);
 		WynikKolizji kolizja(Organizm* organizm);
 		void rysowanie();
+	private:
+		void sprobujUniknacWalce(int& nowyX, int& nowyY);
+
 	};
 }
