@@ -6,7 +6,7 @@
 
 
 Zwierze::Zwierze(int sila, int inicjatywa, int x, int y, Swiat* swiat, IdOrganizmu Id)
-	: Organizm(sila, inicjatywa, x, y, swiat, Id) 
+	: Organizm(sila, inicjatywa, x, y, swiat, Id), oryginalnaSila(sila) 
 { 
 	srand(time(NULL));
 }
@@ -102,6 +102,7 @@ int Zwierze::wykonajRuch(int nowyX, int nowyY)
 		{
 			swiat->Ruch(this, nowyX, nowyY);
 			sila += 4;
+			oryginalnaSila += 4;
 		}
 		return wynik;
 	}

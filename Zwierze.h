@@ -15,6 +15,8 @@ protected:
 	bool rozmnazaj(int x, int y);
 	int wykonajRuch(int nowyX, int nowyY);
 
+	int oryginalnaSila;
+
 private:
 	void dodajKomunikatO_WynikuWalki(Organizm* organizm, int x, int y, bool przeciwnikZginal);
 };

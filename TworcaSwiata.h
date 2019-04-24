@@ -3,17 +3,17 @@
 #include "Swiat.h"
 
 
-#define LICZBAWILKOW 0
-#define LICZBAOWIEC 0
-#define LICZBALISOW 0
-#define LICZBAZOLWI 0
+#define LICZBAWILKOW 2
+#define LICZBAOWIEC 2
+#define LICZBALISOW 2
+#define LICZBAZOLWI 2
 #define LICZBAANTYLOP 2
-#define LICZBATRAWY 0
-#define LICZBAMLECZY 0
-#define LICZBAGUARANY 0
-#define LICZBAWILCZYCHJAGOD 0
+#define LICZBATRAWY 2
+#define LICZBAMLECZY 2
+#define LICZBAGUARANY 2
+#define LICZBAWILCZYCHJAGOD 2
 #define LICZBABARSZY 0
-#define DODAJ_CZLOWIEKA false
+#define DODAJ_CZLOWIEKA true
 
 namespace tworcaSwiata
 {
