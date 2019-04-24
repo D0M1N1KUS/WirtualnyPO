@@ -4,14 +4,12 @@
 guarana::Guarana::Guarana(int sila, int x, int y, Swiat * swiat)
 	: Roslina(sila, x, y, swiat, GUARANA) { }
 
-int guarana::Guarana::akcja()
+WynikKolizji guarana::Guarana::kolizja(Organizm* organizm)
 {
-	return Roslina::akcja();
-}
-
-WynikKolizji guarana::Guarana::kolizja()
-{
-	return WynikKolizji();
+	Roslina::kolizja(organizm);
+	swiat->DodajKomunikat(NazwaOrganizmu(organizm->GetID()) + " zwmocnil sie do " + 
+		std::to_string(organizm->getSila() + 4) + " w (" + std::to_string(x) + "," + std::to_string(y) + ")");
+	return WZMOCNIENIE;
 }
 
 void guarana::Guarana::rysowanie()

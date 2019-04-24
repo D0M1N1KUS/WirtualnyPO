@@ -1,17 +1,19 @@
 #include "WilczeJagody.h"
+#include "Swiat.h"
 #include <iostream>
 
 wilczeJagody::WilczeJagody::WilczeJagody(int sila, int x, int y, Swiat * swiat)
 	: Roslina(sila, x, y, swiat, IdOrganizmu::WILCZAJAGODA) { }
 
-int wilczeJagody::WilczeJagody::akcja()
+WynikKolizji wilczeJagody::WilczeJagody::kolizja(Organizm* organizm)
 {
-	return Roslina::akcja();
-}
-
-WynikKolizji wilczeJagody::WilczeJagody::kolizja()
-{
-	return WynikKolizji();
+	Roslina::kolizja(organizm);
+	swiat->usunOrganizmZPlanszy(this);
+	swiat->usunOrganizmZPlanszy(organizm);
+	swiat->ustawOrganizmDoUsuniecia(this);
+	swiat->DodajKomunikat(NazwaOrganizmu(organizm->GetID()) + " zatrul sie w (" + 
+		std::to_string(x) + "," + std::to_string(y) + ")");
+	return ZATRUCIE;
 }
 
 void wilczeJagody::WilczeJagody::rysowanie()

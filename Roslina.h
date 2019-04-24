@@ -2,7 +2,7 @@
 
 #include "Organizm.h"
 
-#define PRAWDOPODOBIENSTWO_ROZRASTANIA_SIE 33
+#define PRAWDOPODOBIENSTWO_ROZRASTANIA_SIE 15
 
 namespace roslina
 {
@@ -10,7 +10,7 @@ namespace roslina
 	{
 	public:
 		Roslina(int sila, int x, int y, Swiat* swiat, IdOrganizmu ID);
-		int akcja();
+		int akcja(Kierunek kierunek = BRAK);
 		WynikKolizji kolizja(Organizm* organizm);
 		virtual void rysowanie() = 0;
 	};

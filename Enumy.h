@@ -7,7 +7,9 @@ enum WynikKolizji
 	RUCH,
 	NIE_MOGE,
 	ROZMNAZANIE,
-	ODEPCHNIECIE
+	ODEPCHNIECIE,
+	ZATRUCIE,
+	WZMOCNIENIE
 };
 
 enum Kierunek

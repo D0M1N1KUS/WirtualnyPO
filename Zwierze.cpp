@@ -126,6 +126,11 @@ int Zwierze::akcja(Kierunek kierunek)
 		}
 		if (wynik == ZWYCIESTWO)
 			return SMIERC;
+		if (wynik == WZMOCNIENIE)
+		{
+			swiat->Ruch(this, nowyX, nowyY);
+			sila += 4;
+		}
 		return wynik;
 	}	
 }

@@ -45,14 +45,11 @@ public:
 	void inicjalizujSwiat(std::vector<Organizm*>* listaOrganizmow, int x, int y);
 	void dodajNowyOrganizm(IdOrganizmu ID, int x, int y);
 	Organizm* stworzNowyOrganizm(IdOrganizmu ID, int pozycjaX, int pozycjaY, int sila = 0, int inicjatywa = 0);
-	void usunOrganizm(Organizm* org);
+	void usunOrganizmZPlanszy(Organizm* org);
 
 	std::vector<Organizm*>::iterator poczatekListyOrganizmow();
 	std::vector<Organizm*>::iterator koniecListyOrganizmow();
-	//std::vector<Organizm*>::iterator usunOrganizm(std::vector<Organizm*>::iterator iterator, Organizm* danyOrganizm);
 	void ustawOrganizmDoUsuniecia(Organizm* organizm);
-	//std::vector<Organizm*>::iterator usunOrganizmDoUsuniecia(Organizm* danyOrganizm);
-	//std::vector<Organizm*>::iterator dodajOrganizmDoDodania(Organizm* danyOrganizm);
 
 	int usunOrganizm(int i, int daneI);
 	int usunOrganizmDoUsuniecia(int daneI);

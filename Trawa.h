@@ -8,8 +8,6 @@ namespace trawa
 	{
 	public:
 		Trawa(int sila, int x, int y, Swiat* swiat);
-		int akcja();
-		WynikKolizji kolizja();
 		void rysowanie();
 	};
 }

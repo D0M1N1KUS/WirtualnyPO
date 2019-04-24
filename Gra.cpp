@@ -27,6 +27,10 @@ gra::Gra::Gra(int x, int y)
 
 gra::Gra::~Gra()
 {
+	delete swiat;
+	delete tworcaSwiata;
+	delete stanZapisu;
+	delete rysownikSwiata;
 }
 
 void gra::Gra::obslugaSterowania()
@@ -88,28 +92,14 @@ int gra::Gra::obslugaKlawiszy()
 
 void gra::Gra::wykonajTure()
 {
-	/*for (std::vector<Organizm*>::iterator it = swiat->poczatekListyOrganizmow();
-		it != swiat->koniecListyOrganizmow(); ++it)
-	{
-		int wynik = (*it)->GetID() == CZLOWIEK 
-			? (*it)->akcja(konwertujNaKierunek(nacisnietyPrzycisk)) 
-			: (*it)->akcja();
-		if (wynik == SMIERC)
-			it = swiat->usunOrganizm(it);
-		if (wynik == ZWYCIESTWO)
-			it = swiat->usunOrganizmDoUsuniecia(*it);
-		if (wynik == ROZMNAZANIE)
-			it = swiat->dodajOrganizmDoDodania(*it);
-	}*/
-
 	for (int i = 0; i < swiat->getIloscOrganizmow(); i++)
 	{
 		int wynik = swiat->getOrganizm(i)->GetID() == CZLOWIEK
 			? swiat->getOrganizm(i)->akcja(konwertujNaKierunek(nacisnietyPrzycisk))
 			: swiat->getOrganizm(i)->akcja();
-		if (wynik == SMIERC)
+		if (wynik == SMIERC || wynik == ZATRUCIE)
 			i = swiat->usunOrganizm(i, i);
-		if (wynik == ZWYCIESTWO)
+		if (wynik == ZWYCIESTWO || wynik == ZATRUCIE)
 			i = swiat->usunOrganizmDoUsuniecia(i);
 		if (wynik == ROZMNAZANIE)
 			i = swiat->dodajOrganizmDoDodania(i);

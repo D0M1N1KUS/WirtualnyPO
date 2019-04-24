@@ -4,14 +4,10 @@
 barszcz::Barszcz::Barszcz(int sila, int x, int y, Swiat * swiat)
 	: Roslina(sila, x, y, swiat, BARSZ) { }
 
-int barszcz::Barszcz::akcja()
-{
-	return 0;
-}
 
 WynikKolizji barszcz::Barszcz::kolizja()
 {
-	return WynikKolizji();
+	return ZATRUCIE;
 }
 
 void barszcz::Barszcz::rysowanie()

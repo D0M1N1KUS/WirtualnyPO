@@ -1,7 +1,7 @@
 #include "WolnePola.h"
 
 wolnePola::WolnePola::WolnePola(Punkt p, Rozmiar r, Swiat* swiat)
-	: punkt(p), rozmiar(r), swiat(swiat)
+	: punkt(Punkt(p.x - 1, p.y - 1)), rozmiar(r), swiat(swiat)
 {
 	punkty = new std::vector<Punkt>();
 }

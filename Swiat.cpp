@@ -99,7 +99,7 @@ void Swiat::dodajNowyOrganizm(IdOrganizmu ID, int x, int y)
 		break;
 	case ANTYLOPA:
 		nowyOrganizm = new antylopa::Antylopa(4, 4, x, y, this);
-	/*case TRAWA:
+	case TRAWA:
 		nowyOrganizm = new trawa::Trawa(0, x, y, this);
 		break;
 	case MLECZ:
@@ -113,7 +113,7 @@ void Swiat::dodajNowyOrganizm(IdOrganizmu ID, int x, int y)
 		break;
 	case BARSZ:
 		nowyOrganizm = new barszcz::Barszcz(10, x, y, this);
-		break;*/
+		break;
 	default:
 		throw std::exception("nieznane ID organizmu");
 	}
@@ -144,21 +144,21 @@ Organizm* Swiat::stworzNowyOrganizm(IdOrganizmu ID, int pozycjaX, int pozycjaY, 
 		break;
 	case ANTYLOPA:
 		nowyOrganizm = new antylopa::Antylopa(sila, inicjatywa, pozycjaX, pozycjaY, this);
-		/*case TRAWA:
-			nowyOrganizm = new trawa::Trawa(sila, pozycjaX, pozycjaY, this);
-			break;
-		case MLECZ:
-			nowyOrganizm = new mlecz::Mlecz(sila, pozycjaX, pozycjaY, this);
-			break;
-		case GUARANA:
-			nowyOrganizm = new guarana::Guarana(sila, pozycjaX, pozycjaY, this);
-			break;
-		case WILCZAJAGODA:
-			nowyOrganizm = new wilczeJagody::WilczeJagody(sila, pozycjaX, pozycjaY, this);
-			break;
-		case BARSZ:
-			nowyOrganizm = new barszcz::Barszcz(sila, pozycjaX, pozycjaY, this);
-			break;*/
+	case TRAWA:
+		nowyOrganizm = new trawa::Trawa(sila, pozycjaX, pozycjaY, this);
+		break;
+	case MLECZ:
+		nowyOrganizm = new mlecz::Mlecz(sila, pozycjaX, pozycjaY, this);
+		break;
+	case GUARANA:
+		nowyOrganizm = new guarana::Guarana(sila, pozycjaX, pozycjaY, this);
+		break;
+	case WILCZAJAGODA:
+		nowyOrganizm = new wilczeJagody::WilczeJagody(sila, pozycjaX, pozycjaY, this);
+		break;
+	case BARSZ:
+		nowyOrganizm = new barszcz::Barszcz(sila, pozycjaX, pozycjaY, this);
+		break;
 	default:
 		throw std::exception("nieznane ID organizmu");
 	}
@@ -166,14 +166,13 @@ Organizm* Swiat::stworzNowyOrganizm(IdOrganizmu ID, int pozycjaX, int pozycjaY, 
 	return nowyOrganizm;
 }
 
-void Swiat::usunOrganizm(Organizm * org)
+void Swiat::usunOrganizmZPlanszy(Organizm * org)
 {
-	plansza[org->getX()][org->getY()] = NULL;
-	std::vector<Organizm*>::iterator iterator = 
-		std::find(listaOrganizmow->begin(), listaOrganizmow->end(), org);
-	if (iterator != listaOrganizmow->end())
-		listaOrganizmow->erase(iterator);
-	delete org;
+	int x = org->getX(), y = org->getY();
+	if (plansza[x][y] == NULL)
+		throw std::exception((std::string("Proba usniecia organizmu z pustego pola (") +
+			std::to_string(x) + "," + std::to_string(y) + ")").c_str());
+	plansza[x][y] = NULL;
 }
 
 std::vector<Organizm*>::iterator Swiat::poczatekListyOrganizmow()
@@ -185,48 +184,11 @@ std::vector<Organizm*>::iterator Swiat::koniecListyOrganizmow()
 {
 	return listaOrganizmow->end();
 }
-//
-//std::vector<Organizm*>::iterator Swiat::usunOrganizm(std::vector<Organizm*>::iterator iterator, Organizm* danyOrganizm)
-//{
-//	if (*iterator == danyOrganizm)
-//		return listaOrganizmow->erase(iterator);
-//	std::vector<Organizm*>::iterator it = listaOrganizmow->erase(iterator);
-//	return it;//listaOrganizmow->erase(iterator);
-//}
-//
+
 void Swiat::ustawOrganizmDoUsuniecia(Organizm* organizm)
 {
 	organizmDoUsuniecia = organizm;
 }
-//
-//std::vector<Organizm*>::iterator Swiat::usunOrganizmDoUsuniecia(Organizm* danyOrganizm)
-//{
-//	auto doUsuniecia = std::find(listaOrganizmow->begin(), listaOrganizmow->end(), organizmDoUsuniecia);
-//	listaOrganizmow->erase(doUsuniecia);
-//	auto it = std::find(listaOrganizmow->begin(), listaOrganizmow->end(), danyOrganizm);
-//	return it;
-//	//TODO: Something is broken while deleting organisms
-//}
-//
-//std::vector<Organizm*>::iterator Swiat::dodajOrganizmDoDodania(Organizm* danyOrganizm)
-//{
-//	for (std::vector<Organizm*>::iterator itA = listaOrganizmow->begin(); itA != listaOrganizmow->end(); ++itA)
-//	{
-//		if (organizmDoDodania->GetID() == (*itA)->GetID())
-//		{
-//			for (auto itB = itA; itB != listaOrganizmow->end(); ++itB)
-//			{
-//				if (organizmDoDodania->GetID() != (*itB)->GetID() || itB == listaOrganizmow->end() - 1)
-//				{
-//					listaOrganizmow->insert(itB, organizmDoDodania);
-//					break;
-//				}
-//			}
-//			break;
-//		}
-//	}
-//	return std::find(listaOrganizmow->begin(), listaOrganizmow->end(), danyOrganizm);
-//}
 
 int Swiat::usunOrganizm(int i, int daneI)
 {

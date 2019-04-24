@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Roslina.h"
+#include "Swiat.h"
 
 namespace guarana
 {
@@ -8,8 +9,7 @@ namespace guarana
 	{
 	public:
 		Guarana(int sila, int x, int y, Swiat* swiat);
-		int akcja();
-		WynikKolizji kolizja();
+		WynikKolizji kolizja(Organizm* organizm);
 		void rysowanie();
 	};
 }

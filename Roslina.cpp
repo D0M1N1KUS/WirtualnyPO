@@ -10,9 +10,13 @@ roslina::Roslina::Roslina(int sila, int x, int y, Swiat * swiat, IdOrganizmu ID)
 	srand(time(NULL));
 }
 
-int roslina::Roslina::akcja()
+int roslina::Roslina::akcja(Kierunek kierunek)
 {
-	if(rand() % 100 < PRAWDOPODOBIENSTWO_ROZRASTANIA_SIE)
+	if(nowyOrganizm)
+	{
+		nowyOrganizm = false;
+	}
+	else if(rand() % 100 < PRAWDOPODOBIENSTWO_ROZRASTANIA_SIE)
 	{
 		wolnePola::WolnePola wyszukanieWolnychPol(Punkt(x, y), Rozmiar(3, 3), swiat);
 		std::vector<Punkt>* wolnePola = wyszukanieWolnychPol.ZnajdzWolnePola();
@@ -23,11 +27,12 @@ int roslina::Roslina::akcja()
 		{
 			Punkt punkDocelowy = wolnePola->at(rand() % wolnePola->size());
 			swiat->dodajNowyOrganizm(ID, punkDocelowy.x, punkDocelowy.y);
-			swiat->DodajKomunikat(NazwaOrganizmu() + " rozros³o sie w (" +
+			swiat->DodajKomunikat(NazwaOrganizmu() + " rozroslo sie w (" +
 				std::to_string(punkDocelowy.x) + "," + std::to_string(punkDocelowy.y) + ")");
 			return ROZMNAZANIE;
 		}
 	}
+	return NIE_MOGE;
 }
 
 WynikKolizji roslina::Roslina::kolizja(Organizm* organizm)

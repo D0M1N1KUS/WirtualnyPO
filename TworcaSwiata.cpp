@@ -54,7 +54,7 @@ Swiat* tworcaSwiata::TworcaSwiata::StworzSwiat()
 		tablicaSwiata[noweX][noweY] = true;
 	}
 
-	/*for (int i = 0; i < LICZBALISOW; i++)
+	for (int i = 0; i < LICZBALISOW; i++)
 	{
 		losujPozycje();
 		listaOrganizmow->push_back(new lis::Lis(3, 7, noweX, noweY, nowySwiat));
@@ -109,7 +109,7 @@ Swiat* tworcaSwiata::TworcaSwiata::StworzSwiat()
 		listaOrganizmow->push_back(new barszcz::Barszcz(0, noweX, noweY, nowySwiat));
 		tablicaSwiata[noweX][noweY] = true;
 	}
-*/
+
 	nowySwiat->inicjalizujSwiat(listaOrganizmow, xs, ys);
 	return nowySwiat;
 }

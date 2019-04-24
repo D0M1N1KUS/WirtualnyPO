@@ -8,8 +8,7 @@ namespace wilczeJagody
 	{
 	public:
 		WilczeJagody(int sila, int x, int y, Swiat* swiat);
-		int akcja();
-		WynikKolizji kolizja();
+		WynikKolizji kolizja(Organizm* organizm);
 		void rysowanie();
 	};
 }

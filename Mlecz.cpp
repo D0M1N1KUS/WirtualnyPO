@@ -6,12 +6,14 @@ mlecz::Mlecz::Mlecz(int sila, int x, int y, Swiat * swiat)
 
 int mlecz::Mlecz::akcja()
 {
-	return 0;
-}
-
-WynikKolizji mlecz::Mlecz::kolizja()
-{
-	return WynikKolizji();
+	if(nowyOrganizm)
+	{
+		nowyOrganizm = false;
+		return NIE_MOGE;
+	}
+	for (int i = 0; i < PROBY_ROZPRZESTRZENIENIA; i++)
+		roslina::Roslina::akcja();
+	return RUCH;
 }
 
 void mlecz::Mlecz::rysowanie()

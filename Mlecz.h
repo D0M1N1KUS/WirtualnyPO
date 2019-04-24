@@ -2,6 +2,8 @@
 
 #include "Roslina.h"
 
+#define PROBY_ROZPRZESTRZENIENIA 3
+
 namespace mlecz
 {
 	class Mlecz : public roslina::Roslina
@@ -9,7 +11,6 @@ namespace mlecz
 	public:
 		Mlecz(int sila, int x, int y, Swiat* swiat);
 		int akcja();
-		WynikKolizji kolizja();
 		void rysowanie();
 	};
 }
