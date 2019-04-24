@@ -13,10 +13,10 @@ zolw::Zolw::Zolw(int sila, int inicjatywa, int x, int y, Swiat * swiat)
 	srand(time(NULL));
 }
 
-int zolw::Zolw::akcja()
+int zolw::Zolw::akcja(Kierunek kierunek)
 {
-	if (rand() % 4) {
-		return Zwierze::akcja();
+	if (rand() % 4 == 0) {
+		return Zwierze::akcja(kierunek);
 	}
 	else {
 		return NIE_MOGE;
@@ -25,8 +25,11 @@ int zolw::Zolw::akcja()
 
 WynikKolizji zolw::Zolw::kolizja(Organizm* organizm)
 {
-	if (organizm->GetID() != ZOLW && organizm->getSila() < 5)
+	if (organizm->GetID() != ZOLW && organizm->getSila() < 5) {
+		swiat->DodajKomunikat(NazwaOrganizmu() + " odpycha " + organizm->NazwaOrganizmu() +
+			" w (" + std::to_string(x) + "," + std::to_string(y) + ")");
 		return ODEPCHNIECIE;
+	}
 	else
 		return Zwierze::kolizja(organizm);
 }

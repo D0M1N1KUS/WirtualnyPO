@@ -7,15 +7,14 @@
 czlowiek::Czlowiek::Czlowiek(int sila, int inicjatywa, int x, int y, Swiat* swiat)
 	: Zwierze(sila, inicjatywa, x, y, swiat, CZLOWIEK) { }
 
-int czlowiek::Czlowiek::akcja()
+int czlowiek::Czlowiek::akcja(Kierunek kierunek)
 {
-	return 0;
+	if (kierunek == MOC)
+		return NIE_MOGE;
+	else
+		return Zwierze::akcja(kierunek);
 }
 
-WynikKolizji czlowiek::Czlowiek::kolizja()
-{
-	return NIE_MOGE;
-}
 
 void czlowiek::Czlowiek::rysowanie()
 {

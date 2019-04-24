@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Zwierze.h"
+#include "Swiat.h"
 
 namespace antylopa
 {
@@ -8,8 +9,8 @@ namespace antylopa
 	{
 	public:
 		Antylopa(int sila, int inicjatywa, int x, int y, Swiat* swiat);
-		int akcja();
-		WynikKolizji kolizja();
+		int akcja(Kierunek kierunek = BRAK);
+		WynikKolizji kolizja(Organizm* organizm);
 		void rysowanie();
 	};
 }

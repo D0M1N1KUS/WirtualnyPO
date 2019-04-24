@@ -15,8 +15,6 @@ lis::Lis::Lis(int sila, int inicjatywa, int x, int y, Swiat * swiat)
 
 int lis::Lis::akcja()
 {
-	
-	Kierunek wybranyKierunek;
 	std::vector<Kierunek>* bezpiecznePola = new std::vector<Kierunek>();
 	if (y > 0 && polePusteLubSlabyPrzeciwnik(x, y - 1))
 		bezpiecznePola->push_back(GORA);
@@ -35,13 +33,6 @@ int lis::Lis::akcja()
 bool lis::Lis::polePusteLubSlabyPrzeciwnik(int x, int y)
 {
 	return swiat->poleJestPuste(x, y) || this->getSila() > swiat->GetOrganizmXY(x, y)->getSila();
-}
-
-
-
-WynikKolizji lis::Lis::kolizja()
-{
-	return WynikKolizji();
 }
 
 void lis::Lis::rysowanie()

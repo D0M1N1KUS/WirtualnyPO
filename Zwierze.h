@@ -13,6 +13,7 @@ public:
 protected:
 	WynikKolizji kolizja(Organizm* organizm);
 	bool rozmnazaj(int x, int y);
+	int wykonajRuch(int nowyX, int nowyY);
 
 private:
 	void dodajKomunikatO_WynikuWalki(Organizm* organizm, int x, int y, bool przeciwnikZginal);

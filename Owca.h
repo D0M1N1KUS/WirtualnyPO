@@ -9,7 +9,6 @@ namespace owca
 	public:
 		Owca(int sila, int inicjatywa, int x, int y, Swiat* swiat);
 		int akcja();
-		WynikKolizji kolizja();
 		void rysowanie();
 	};
 }

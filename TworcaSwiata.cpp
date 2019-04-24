@@ -2,6 +2,7 @@
 #include <cstdio>
 #include "Organizm.h"
 #include <ctime>
+#include "Czlowiek.h"
 
 void tworcaSwiata::TworcaSwiata::zaalokujTablice()
 {
@@ -29,6 +30,11 @@ void tworcaSwiata::TworcaSwiata::losujPozycje()
 tworcaSwiata::TworcaSwiata::TworcaSwiata(int xs, int ys)
 	: xs(xs), ys(ys)
 {
+
+	if (LICZBAWILKOW + LICZBAOWIEC + LICZBALISOW + LICZBAZOLWI + LICZBAANTYLOP + LICZBATRAWY + LICZBAMLECZY +
+		LICZBAGUARANY + LICZBAWILCZYCHJAGOD + LICZBABARSZY + (DODAJ_CZLOWIEKA ? 1 : 0) > xs*ys)
+		throw std::exception("Za male pole na zadana ilosc organizmow");
+
 	srand(time(NULL));
 	nowySwiat = new Swiat(xs, ys);
 }
@@ -40,10 +46,23 @@ Swiat* tworcaSwiata::TworcaSwiata::StworzSwiat()
 
 	int x, y;
 
+	for (int i = 0; i < LICZBALISOW; i++)
+	{
+		losujPozycje();
+		listaOrganizmow->push_back(new lis::Lis(3, 7, noweX, noweY, nowySwiat));
+		tablicaSwiata[noweX][noweY] = true;
+	}
+
 	for (int i = 0; i < LICZBAWILKOW; i++)
 	{
 		losujPozycje();
 		listaOrganizmow->push_back(new wilk::Wilk(9, 5, noweX, noweY, nowySwiat));
+		tablicaSwiata[noweX][noweY] = true;
+	}
+
+	if (DODAJ_CZLOWIEKA) {
+		losujPozycje();
+		listaOrganizmow->push_back(new czlowiek::Czlowiek(5, 4, noweX, noweY, nowySwiat));
 		tablicaSwiata[noweX][noweY] = true;
 	}
 
@@ -54,12 +73,6 @@ Swiat* tworcaSwiata::TworcaSwiata::StworzSwiat()
 		tablicaSwiata[noweX][noweY] = true;
 	}
 
-	for (int i = 0; i < LICZBALISOW; i++)
-	{
-		losujPozycje();
-		listaOrganizmow->push_back(new lis::Lis(3, 7, noweX, noweY, nowySwiat));
-		tablicaSwiata[noweX][noweY] = true;
-	}
 
 	for (int i = 0; i < LICZBAZOLWI; i++)
 	{

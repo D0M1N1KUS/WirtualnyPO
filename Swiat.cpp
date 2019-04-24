@@ -1,4 +1,5 @@
 #include "Swiat.h"
+#include "Czlowiek.h"
 
 void Swiat::zaalokujNowySwiat(unsigned int y, unsigned int x)
 {
@@ -99,6 +100,7 @@ void Swiat::dodajNowyOrganizm(IdOrganizmu ID, int x, int y)
 		break;
 	case ANTYLOPA:
 		nowyOrganizm = new antylopa::Antylopa(4, 4, x, y, this);
+		break;
 	case TRAWA:
 		nowyOrganizm = new trawa::Trawa(0, x, y, this);
 		break;
@@ -113,6 +115,9 @@ void Swiat::dodajNowyOrganizm(IdOrganizmu ID, int x, int y)
 		break;
 	case BARSZ:
 		nowyOrganizm = new barszcz::Barszcz(10, x, y, this);
+		break;
+	case CZLOWIEK:
+		nowyOrganizm = new czlowiek::Czlowiek(5, 4, x, y, this);
 		break;
 	default:
 		throw std::exception("nieznane ID organizmu");
@@ -159,6 +164,9 @@ Organizm* Swiat::stworzNowyOrganizm(IdOrganizmu ID, int pozycjaX, int pozycjaY, 
 	case BARSZ:
 		nowyOrganizm = new barszcz::Barszcz(sila, pozycjaX, pozycjaY, this);
 		break;
+	case CZLOWIEK:
+		nowyOrganizm = new czlowiek::Czlowiek(sila, inicjatywa, pozycjaX, pozycjaY, this);
+		break;
 	default:
 		throw std::exception("nieznane ID organizmu");
 	}
@@ -193,7 +201,7 @@ void Swiat::ustawOrganizmDoUsuniecia(Organizm* organizm)
 int Swiat::usunOrganizm(int i, int daneI)
 {
 	listaOrganizmow->erase(listaOrganizmow->begin() + i);
-	return i <= daneI ? i - 1 : i;
+	return i <= daneI ? daneI - 1 : daneI;
 }
 
 int Swiat::usunOrganizmDoUsuniecia(int daneI)
@@ -201,7 +209,7 @@ int Swiat::usunOrganizmDoUsuniecia(int daneI)
 	auto doUsuniecia = std::find(listaOrganizmow->begin(), listaOrganizmow->end(), organizmDoUsuniecia);
 	int i = std::distance(listaOrganizmow->begin(), doUsuniecia);
 	listaOrganizmow->erase(doUsuniecia);
-	return i <= daneI ? i - 1 : i;
+	return i <= daneI ? daneI - 1 : daneI;
 }
 
 int Swiat::dodajOrganizmDoDodania(int daneI)

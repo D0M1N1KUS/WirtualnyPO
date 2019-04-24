@@ -45,9 +45,8 @@ WynikKolizji Zwierze::kolizja(Organizm* organizm)
 		{
 			if (silaSasiada <= sila)
 			{
-				swiat->ustawOrganizmDoUsuniecia(organizm);
+				swiat->usunOrganizmZPlanszy(organizm);
 				dodajKomunikatO_WynikuWalki(organizm, x, y, true);
-				swiat->Ruch(this, x, y);
 				return ZWYCIESTWO;
 			}
 			else
@@ -81,6 +80,31 @@ bool Zwierze::rozmnazaj(int x, int y)
 	return false;
 }
 
+int Zwierze::wykonajRuch(int nowyX, int nowyY)
+{
+	if (swiat->poleJestPuste(nowyX, nowyY))
+	{
+		swiat->Ruch(this, nowyX, nowyY);
+		return RUCH;
+	}
+	else
+	{
+		WynikKolizji wynik = swiat->GetOrganizmXY(nowyX, nowyY)->kolizja(this);
+		if (wynik == SMIERC) {
+			swiat->Ruch(this, nowyX, nowyY);
+			return ZWYCIESTWO;
+		}
+		if (wynik == ZWYCIESTWO)
+			return SMIERC;
+		if (wynik == WZMOCNIENIE)
+		{
+			swiat->Ruch(this, nowyX, nowyY);
+			sila += 4;
+		}
+		return wynik;
+	}
+}
+
 int Zwierze::akcja(Kierunek kierunek)
 {
 	if(nowyOrganizm)
@@ -112,26 +136,9 @@ int Zwierze::akcja(Kierunek kierunek)
 		break;
 	}
 
-	if (swiat->poleJestPuste(nowyX, nowyY))
-	{
-		swiat->Ruch(this, nowyX, nowyY);
-		return RUCH;
-	}
-	else
-	{
-		WynikKolizji wynik = swiat->GetOrganizmXY(nowyX, nowyY)->kolizja(this);
-		if (wynik == SMIERC) {
-			swiat->Ruch(this, nowyX, nowyY);
-			return ZWYCIESTWO;
-		}
-		if (wynik == ZWYCIESTWO)
-			return SMIERC;
-		if (wynik == WZMOCNIENIE)
-		{
-			swiat->Ruch(this, nowyX, nowyY);
-			sila += 4;
-		}
-		return wynik;
-	}	
+	if (nowyX < 0 || nowyY < 0)
+		return NIE_MOGE;
+
+	return wykonajRuch(nowyX, nowyY);	
 }
 

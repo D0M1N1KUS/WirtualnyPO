@@ -78,7 +78,7 @@ void Organizm::setPozycja(int x, int y)
 
 bool Organizm::jestZwierze(IdOrganizmu id)
 {
-	return id < 6;
+	return id == WILK || id == OWCA || id == LIS || id == ZOLW || id == ANTYLOPA || id == CZLOWIEK;
 }
 
 

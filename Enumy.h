@@ -29,10 +29,10 @@ enum IdOrganizmu
 	LIS = 3,
 	ZOLW = 4,
 	ANTYLOPA = 5,
-	TRAWA = 6,
+	CZLOWIEK = 6,
 	MLECZ = 7,
 	GUARANA = 8,
 	WILCZAJAGODA = 9,
 	BARSZ = 10,
-	CZLOWIEK = 11
+	TRAWA = 11
 };

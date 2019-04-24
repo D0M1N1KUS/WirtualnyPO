@@ -4,12 +4,11 @@
 
 namespace czlowiek
 {
-	class Czlowiek : protected Zwierze
+	class Czlowiek : public Zwierze
 	{
 	public:
 		Czlowiek(int sila, int inicjatywa, int x, int y, Swiat* swiat);
-		int akcja();
-		WynikKolizji kolizja();
+		int akcja(Kierunek kierunek = BRAK);
 		void rysowanie();
 	};
 }

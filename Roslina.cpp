@@ -41,6 +41,7 @@ WynikKolizji roslina::Roslina::kolizja(Organizm* organizm)
 	IdOrganizmu idSasiada = organizm->GetID();
 	if (jestZwierze(idSasiada))
 	{
+		swiat->ustawOrganizmDoUsuniecia(this);
 		swiat->DodajKomunikat(NazwaOrganizmu(organizm->GetID()) + " zjadl " + NazwaOrganizmu() +
 			" w (" + std::to_string(x) + "," + std::to_string(y) + ")");
 		return SMIERC;

@@ -13,11 +13,6 @@ int owca::Owca::akcja()
 	return Zwierze::akcja();
 }
 
-WynikKolizji owca::Owca::kolizja()
-{
-	return WynikKolizji();
-}
-
 void owca::Owca::rysowanie()
 {
 	std::cout << "o";
