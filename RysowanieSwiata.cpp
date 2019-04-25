@@ -25,7 +25,7 @@ void rysowanieSwiata::RysowanieSwiata::rysujSwiat()
 			if (x > 0 && y > 0 && x < swiat->getXS() + 1 && y < swiat->getYS() + 1)
 			{
 				auto organizm = swiat->GetOrganizmXY(x - 1, y - 1);
-				if (organizm == NULL) std::cout << " ";
+				if (organizm == nullptr) std::cout << " ";
 				else organizm->rysowanie();
 			}
 			else

@@ -33,7 +33,7 @@ private:
 	Organizm* organizmDoDodania;
 
 public:
-	void zaalokujNowySwiat(unsigned int y, unsigned int x);
+	void zaalokujNowySwiat(int y, int x);
 	Swiat(int xs, int ys);
 	void wyczyscSwiat();
 	~Swiat();

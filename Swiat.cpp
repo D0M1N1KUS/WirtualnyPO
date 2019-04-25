@@ -1,15 +1,15 @@
 #include "Swiat.h"
 #include "Czlowiek.h"
 
-void Swiat::zaalokujNowySwiat(unsigned int y, unsigned int x)
+void Swiat::zaalokujNowySwiat(int x, int y)
 {
-	plansza = new Organizm**[y];
-	for (int i = 0; i < y; i++)
+	plansza = new Organizm**[x];
+	for (int i = 0; i < x; i++)
 	{
-		plansza[i] = new Organizm*[x];
-		for (int j = 0; j < x; j++)
+		plansza[i] = new Organizm*[y];
+		for (int j = 0; j < y; j++)
 		{
-			plansza[i][j] = NULL;
+			plansza[i][j] = nullptr;
 		}
 	}
 }
@@ -19,7 +19,7 @@ Swiat::Swiat(int xs, int ys)
 {
 	if (xs < MIN_X || ys < MIN_Y || xs > 80 || ys > 80)
 		throw std::exception("Podano nieprawidlowy rozmiar planszy!");
-	zaalokujNowySwiat(ys, xs);
+	//zaalokujNowySwiat(ys, xs);
 }
 
 void Swiat::wyczyscSwiat()
@@ -28,7 +28,8 @@ void Swiat::wyczyscSwiat()
 		for (int i = 0; i < xs; i++)
 		{
 			for (int j = 0; j < ys; j++)
-				delete plansza[i][j];
+				if(plansza[i][j] != nullptr)
+					delete plansza[i][j];
 			delete[] plansza[i];
 		}
 		delete[] plansza;
