@@ -35,10 +35,10 @@ void Swiat::wyczyscSwiat()
 		delete[] plansza;
 	}
 
-	if (listaOrganizmow != nullptr) {
+	/*if (listaOrganizmow != nullptr) {
 		listaOrganizmow->clear();
 		delete listaOrganizmow;
-	}
+	}*/
 }
 
 Swiat::~Swiat()
